@@ -56,12 +56,16 @@ document.addEventListener('keydown', function (event) {
       'font-size: 5rem; color: #5865F2;  -webkit-text-stroke: 2px black;'
     );
     console.log(
-      `If someone told you to copy/paste something here you have an 420/69 chance you're being scammed.`,
+      `%c If someone told you to copy/paste something here you have an 420/69 chance you're being scammed.`,
       'font-size: 1rem; color: #333;  -webkit-text-stroke: 2px #fff;'
     );
     console.log(
-      `Unless you understand exactly what you are doing, close this window and stay safe.`,
+      `%c Unless you understand exactly what you are doing, close this window and stay safe.`,
       'font-size: 1rem; color: #333;  -webkit-text-stroke: 2px #fff;'
+    );
+    console.log(
+      '%c Pasting anything in here could give attackers access to your Discord account.',
+      'font-size: 5rem; color: #ff0000;  -webkit-text-stroke: 2px black;'
     );
   }
 });
