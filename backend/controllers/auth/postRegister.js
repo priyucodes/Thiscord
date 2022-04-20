@@ -30,6 +30,13 @@ const postRegister = async (req, res) => {
     const token = jwt.sign({ userId: user._id, mail }, process.env.TOKEN_KEY, {
       expiresIn: process.env.TOKEN_EXPIRES_IN,
     });
+    // res.cookie('jwt', token, {
+    //   expires: new Date(
+    //     Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+    //   ),
+    //   httpOnly: true,
+    //   secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
+    // });
 
     res.status(201).json({
       user: {

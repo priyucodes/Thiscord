@@ -10,6 +10,7 @@ export const getActions = dispatch => {
     login: (userDetails, navigate) => dispatch(login(userDetails, navigate)),
     register: (userDetails, navigate) =>
       dispatch(register(userDetails, navigate)),
+    setUserDetails: userDetails => dispatch(setUserDetails(userDetails)),
   };
 };
 const setUserDetails = userDetails => {
@@ -21,7 +22,7 @@ const setUserDetails = userDetails => {
 const login = (userDetails, navigate) => {
   return async dispatch => {
     const response = await api.login(userDetails);
-    console.log(response);
+    // console.log(response);
     if (response.error) {
       // Alert
       dispatch(openAlertMessage(response?.exception?.response?.data));

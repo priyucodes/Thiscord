@@ -42,6 +42,7 @@ function InputWithLabel(props) {
         onChange={valueChangeHandler}
         type={type}
         placeholder={placeholder}
+        style={props.additionalStyles ? props.additionalStyles : {}}
       />
     </Wrapper>
   );

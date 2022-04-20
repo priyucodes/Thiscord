@@ -21,6 +21,14 @@ const postLogin = async (req, res) => {
           expiresIn: process.env.TOKEN_EXPIRES_IN,
         }
       );
+      // res.cookie('jwt', token, {
+      //   expires: new Date(
+      //     Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+      //   ),
+      //   httpOnly: true,
+      //   secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
+      // });
+
       return res.status(200).json({
         user: {
           mail: user.mail,

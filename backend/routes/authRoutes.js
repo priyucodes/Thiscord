@@ -32,4 +32,8 @@ router.post(
 router.get('/test', verifyToken, (req, res) => {
   res.send('Yipee It worked');
 });
+// cookie-parser npm
+// router.get('/logout', verifyToken, (req, res) => {
+//   authControllers.controllers.postLogout(req, res);
+// });
 module.exports = router;

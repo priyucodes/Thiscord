@@ -17,7 +17,7 @@ const validatePassword = password => {
   return password.length >= 8 && password.length <= 20;
 };
 
-const validateMail = mail => {
+export const validateMail = mail => {
   const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   return emailPattern.test(mail);
   // .test() Returns a Boolean value that indicates whether or not a pattern exists in a searched string.
