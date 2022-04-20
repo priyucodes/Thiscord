@@ -57,15 +57,15 @@ document.addEventListener('keydown', function (event) {
     );
     console.log(
       `%c If someone told you to copy/paste something here you have an 420/69 chance you're being scammed.`,
-      'font-size: 1rem; color: #333;  -webkit-text-stroke: 2px #fff;'
+      'font-size: 1rem; color: #333;  -webkit-text-stroke: 1px #fff;'
     );
     console.log(
       `%c Unless you understand exactly what you are doing, close this window and stay safe.`,
-      'font-size: 1rem; color: #333;  -webkit-text-stroke: 2px #fff;'
+      'font-size: 1rem; color: #333;  -webkit-text-stroke: 1px #fff;'
     );
     console.log(
       '%c Pasting anything in here could give attackers access to your Discord account.',
-      'font-size: 5rem; color: #ff0000;  -webkit-text-stroke: 2px black;'
+      'font-size: 3rem; color: #ff0000;  -webkit-text-stroke: 1px black;'
     );
   }
 });
