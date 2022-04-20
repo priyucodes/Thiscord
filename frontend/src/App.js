@@ -55,9 +55,15 @@ document.addEventListener('keydown', function (event) {
       '%c Hold Up!',
       'font-size: 5rem; color: #5865F2;  -webkit-text-stroke: 2px black;'
     );
+    console.log(
+      `If someone told you to copy/paste something here you have an 420/69 chance you're being scammed.`,
+      'font-size: 1rem; color: #333;  -webkit-text-stroke: 2px #fff;'
+    );
+    console.log(
+      `Unless you understand exactly what you are doing, close this window and stay safe.`,
+      'font-size: 1rem; color: #333;  -webkit-text-stroke: 2px #fff;'
+    );
   }
 });
-
-setInterval(() => {}, 5000);
 
 export default App;
