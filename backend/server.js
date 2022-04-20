@@ -5,6 +5,11 @@ const http = require('http');
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const mongoSanitize = require('express-mongo-sanitize');
+const xss = require('xss-clean');
+
+const cookieParser = require('cookie-parser');
+const compression = require('compression');
 
 // Our modules
 const authRoutes = require('./routes/authRoutes');
@@ -16,11 +21,17 @@ const PORT = process.env.PORT || process.env.API_PORT;
 const app = express();
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true, limit: '10kb' }));
+
 app.use(cors());
+
+app.use(mongoSanitize());
+app.use(xss());
+
+app.use(compression());
 
 // Register the modules
 app.use('/api/auth', authRoutes);
-
 // SERVER
 const server = http.createServer(app);
 
