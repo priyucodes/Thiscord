@@ -7,6 +7,7 @@ import Messenger from './Messenger/Messenger';
 import AppBar from './AppBar/AppBar';
 import { logout } from '../shared/utils/auth';
 import { getActions } from '../store/actions/authActions';
+import { connectWithSocketServer } from '../realtimeCommunication/socketConnection';
 
 const Wrapper = styled('div')({
   width: '100%',
@@ -23,6 +24,7 @@ function Dashboard({ setUserDetails }) {
         // window.location.pathname = 'login';
       } else {
         setUserDetails(JSON.parse(userDetails));
+        connectWithSocketServer(JSON.parse(userDetails));
       }
     },
     // Only run once at start when componentMounts

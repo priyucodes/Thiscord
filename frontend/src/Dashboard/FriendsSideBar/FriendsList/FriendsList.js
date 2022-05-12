@@ -1,34 +1,23 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { styled } from '@mui/system';
 import FriendsListItem from './FriendsListItem';
-
-const DUMMY_FRIENDS = [
-  {
-    id: 1,
-    username: 'Penny',
-    isOnline: true,
-  },
-  {
-    id: 2,
-    username: 'Annie',
-    isOnline: false,
-  },
-  {
-    id: 3,
-    username: 'Chapra',
-    isOnline: false,
-  },
-];
-
 const MainContainer = styled('div')({
   flexGrow: 1,
   width: '100%',
 });
+const checkOnlineUsers = (friends = [], onlineUsers = []) => {
+  friends.forEach(f => {
+    const isUserOnline = onlineUsers.find(user => user.userId === f.id);
+    f.isOnline = isUserOnline ? true : false;
+  });
 
-const FriendsList = () => {
+  return friends;
+};
+const FriendsList = ({ friends, onlineUsers }) => {
   return (
     <MainContainer>
-      {DUMMY_FRIENDS.map(f => {
+      {checkOnlineUsers(friends, onlineUsers).map(f => {
         return (
           <FriendsListItem
             username={f.username}
@@ -41,5 +30,10 @@ const FriendsList = () => {
     </MainContainer>
   );
 };
-
-export default FriendsList;
+// Under the name in store.js we use friends name. so we get ccess to field which is in reducer.
+const mapStoreStateToProps = ({ friends, onlineUsers }) => {
+  return {
+    ...friends,
+  };
+};
+export default connect(mapStoreStateToProps)(FriendsList);

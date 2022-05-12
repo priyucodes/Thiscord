@@ -8,11 +8,13 @@ const mongoose = require('mongoose');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 
+const socketServer = require('./socketServer');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
 
 // Our modules
 const authRoutes = require('./routes/authRoutes');
+const friendInvitationRoutes = require('./routes/friendInvitationRoutes');
 
 require('dotenv').config();
 
@@ -32,9 +34,11 @@ app.use(compression());
 
 // Register the modules
 app.use('/api/auth', authRoutes);
+app.use('/api/friend-invitation', friendInvitationRoutes);
+
 // SERVER
 const server = http.createServer(app);
-
+socketServer.registerSocketServer(server);
 const MONGO_URL = process.env.MONGO_URI.replace(
   '<password>',
   process.env.MONGO_PASSWORD

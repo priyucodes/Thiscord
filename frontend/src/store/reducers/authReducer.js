@@ -1,7 +1,7 @@
 import { authActions } from '../actions/authActions';
 
 const initState = {
-  user: 'Dummy Holder',
+  user: 'Dummy Holder(Auth Reducer)',
   userDetails: null,
 };
 const reducer = (state = initState, action) => {

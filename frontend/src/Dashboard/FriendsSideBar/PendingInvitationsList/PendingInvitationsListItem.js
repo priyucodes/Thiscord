@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Box, Tooltip, Typography } from '@mui/material';
+import { connect } from 'react-redux';
 import Avatar from '../../../shared/components/Avatar';
 import InvitationDecisionButton from './InvitationDecisionButton';
-
+import { getActions } from '../../../store/actions/friendsActions';
 const PendingInvitationsListItem = ({
   id,
   username,
@@ -55,4 +56,9 @@ const PendingInvitationsListItem = ({
   );
 };
 
-export default PendingInvitationsListItem;
+const mapActionsToProps = dispatch => {
+  return {
+    ...getActions(dispatch),
+  };
+};
+export default connect(null, mapActionsToProps)(PendingInvitationsListItem);

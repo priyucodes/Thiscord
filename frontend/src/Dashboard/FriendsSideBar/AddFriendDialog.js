@@ -5,6 +5,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
+import { connect } from 'react-redux';
 import ReactLoading from 'react-loading';
 
 import { Tooltip } from '@mui/material';
@@ -13,6 +14,7 @@ import { validateMail } from '../../shared/utils/validators';
 import InputWithLabel from '../../shared/components/InputWithLabel';
 import CustomPrimaryButton from '../../shared/components/CustomPrimaryButton';
 
+import { getActions } from '../../store/actions/friendsActions';
 const invalidFormMessage = () => {
   return 'Invalid mail';
 };
@@ -29,7 +31,8 @@ const AddFriendDialog = ({
   const [lable, setLable] = useState('Send');
 
   const sendInvitationHandler = () => {
-    // Send Friend Request to sever
+    // Send Friend Request to server
+    sendFriendInvitation({ targetMailAddress: mail }, closeDialogHandler);
   };
   const onCloseDialog = () => {
     closeDialogHandler();
@@ -98,5 +101,11 @@ const AddFriendDialog = ({
     </div>
   );
 };
+const mapActionsToProps = dispatch => {
+  return {
+    ...getActions(dispatch),
+  };
+};
 
-export default AddFriendDialog;
+// mapStateToProps,mapActionsToProps
+export default connect(null, mapActionsToProps)(AddFriendDialog);
