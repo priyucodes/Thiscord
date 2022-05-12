@@ -6,11 +6,13 @@ const updateFriendsPendingInvitations = async userId => {
   try {
     // Active connections of specific userId
     const receiverList = serverStore.getActiveConnections(userId);
+
     if (!receiverList) return;
     // if (receiverList.legnth > 0) {};
     const pendingInvitations = await FriendInvitation.find({
       receiverId: userId,
     }).populate('senderId', '_id username mail');
+
     // instead of obejctId we will get the data of that id(user)
 
     const io = serverStore.getSocketServerInstance();
@@ -62,3 +64,23 @@ module.exports = {
   updateFriendsPendingInvitations,
   updateFriends,
 };
+
+/*
+ const ttt = await Promise.all(
+      pendingInvitations.map(async f => {
+        // console.log(f.receiverId, f.senderId._id);
+        const userReceiving = await User.findById(f.receiverId);
+
+        duplicate = userReceiving.friends.findIndex(
+          friendId => friendId.toString() === f.senderId._id.toString()
+        );
+        return duplicate;
+      })
+    );
+    // console.log(ttt);
+    const tt = ttt.filter((value, i, arr) => {
+      return value !== -1;
+    });
+   
+    if (tt.length === 0) throw 'GOs';
+    */

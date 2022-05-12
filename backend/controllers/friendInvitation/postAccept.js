@@ -1,4 +1,5 @@
 const FriendInvitation = require('../../models/friendInvitationModel');
+const { remove } = require('../../models/userModel');
 const User = require('../../models/userModel');
 const friendsUpdates = require('../../socketHandlers/updates/friends');
 
@@ -13,12 +14,29 @@ const postAccept = async (req, res) => {
     }
     const { senderId, receiverId } = invitation;
     // console.log(invitation);
+
+    const currentUser = await User.findById(req.user.userId);
+    console.log(currentUser.friends);
+    console.log('Sending ID', senderId.toString());
+    console.log('receiver ID', receiverId.toString());
+    const removeId = currentUser.friends.filter(fid => {
+      if (
+        fid.toString() === senderId.toString() ||
+        fid.toString() === receiverId.toString()
+      ) {
+        return fid;
+      }
+    });
+
+    if (removeId.length >= 1)
+      return res
+        .status(404)
+        .end('User Already added! Please reject the friend request! ');
     // Add Friend to both sender/receiver
     const userSending = await User.findById(senderId);
     userSending.friends = [...userSending.friends, receiverId];
     const userReceiving = await User.findById(receiverId);
 
-    // console.log(userSending, 'DD', userReceiving);
     userReceiving.friends = [...userReceiving.friends, senderId];
 
     await userSending.save();
@@ -33,7 +51,7 @@ const postAccept = async (req, res) => {
 
     // Update list of pending friend invitations
     friendsUpdates.updateFriendsPendingInvitations(receiverId.toString());
-
+    friendsUpdates.updateFriendsPendingInvitations(senderId.toString());
     return res.status(200).send('Friend successfully added');
   } catch (err) {
     console.log(err);
@@ -43,10 +61,24 @@ const postAccept = async (req, res) => {
 
 module.exports = postAccept;
 
-/*    if (
-      userSending.friends.find(f => f.id === receiverId) &&
-      userReceiving.friends.find(f => f.id === senderId)
+/*    
+     if (
+      pendingInvitations.forEach(f => {
+        f.senderId.toString() === senderId.toString() &&
+        f.receiverId.toString() === receiverId.toString()
+          ? ''
+          : [];
+      })
+    );
+
+        if (
+      userSending.friends.find(f => {
+        console.log(f === receiverId);
+        return f === receiverId;
+      }) &&
+      userReceiving.friends.find(f => f === senderId)
     ) {
       return res.status(404).send('ERRORRR aagyi bhai');
-    } 
+    }
+
     */

@@ -64,7 +64,7 @@ document.addEventListener('keydown', function (event) {
       'font-size: 1rem; color: #333;  -webkit-text-stroke: 1px #fff;'
     );
     console.log(
-      '%c Pasting anything in here could give attackers access to your Discord account.',
+      '%c Pasting anything in here could give attackers access to your Thiscord account.',
       'font-size: 3rem; color: #ff0000;  -webkit-text-stroke: 1px black;'
     );
   }
