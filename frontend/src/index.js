@@ -18,13 +18,16 @@ ReactDOM.render(
 );
 */
 // TODO:: Wrap render with React.StrictMode
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <CookiesProvider>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </CookiesProvider>
+  <React.StrictMode>
+    <CookiesProvider>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </CookiesProvider>
+  </React.StrictMode>
 );
 
 // If you want your app to work offline and load faster, you can change
