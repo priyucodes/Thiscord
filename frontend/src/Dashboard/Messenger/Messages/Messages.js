@@ -23,6 +23,15 @@ const convertDateToReadable = (date, format) => {
   return format.replace(/mm|dd|yy|yyy/gi, matched => map[matched]);
 };
 const Messages = ({ chosenChatDetails, messages }) => {
+  const messagesEndRef = useRef(null);
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView();
+    //{ behavior: 'smooth' }
+  };
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
   return (
     <MainContainer>
       <MessagesHeader name={chosenChatDetails?.name} />
@@ -56,6 +65,7 @@ const Messages = ({ chosenChatDetails, messages }) => {
           </div>
         );
       })}
+      <div ref={messagesEndRef} style={{ marginTop: '20px' }} />
     </MainContainer>
   );
 };

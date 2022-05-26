@@ -1,5 +1,6 @@
+const { v4: uuidv4 } = require('uuid');
 const connectedUsers = new Map();
-
+let activeRooms = [];
 let io = null;
 
 const setSocketServerInstance = ioInstance => {
@@ -44,6 +45,63 @@ const getOnlineUsers = () => {
 
   return onlineUsers;
 };
+
+// ROOMS
+const addNewActiveRoom = (userId, socketId) => {
+  const newActiveRoom = {
+    roomCreator: {
+      userId,
+      socketId,
+    },
+    // POP kregein baad m jo user left kia dekhna h ki kaise leave kia
+    participants: [{ userId, socketId }],
+    roomId: uuidv4(),
+  };
+
+  activeRooms = [...activeRooms, newActiveRoom];
+
+  return newActiveRoom;
+};
+const getActiveRooms = () => {
+  return [...activeRooms];
+};
+const getActiveRoom = roomId => {
+  const activeRoom = activeRooms.find(
+    activeRoom => activeRoom.roomId === roomId
+  );
+  if (activeRoom) {
+    return { ...activeRoom };
+  } else {
+    return null;
+  }
+};
+const joinActiveRoom = (roomId, newParticipant) => {
+  const room = activeRooms.find(room => room.roomId === roomId);
+  activeRooms = activeRooms.filter(room => room.roomId !== roomId);
+
+  const updatedRoom = {
+    ...room,
+    participants: [...room.participants, newParticipant],
+  };
+  activeRooms.push(updatedRoom);
+};
+
+const leaveActiveRoom = (roomId, participantSocketId) => {
+  const activeRoom = activeRooms.find(room => room.roomId === roomId);
+  if (activeRoom) {
+    const cloneActiveRoom = { ...activeRoom };
+    cloneActiveRoom.participants = cloneActiveRoom.participants.filter(
+      participant => participant.socketId !== participantSocketId
+    );
+
+    // Remove Active Room, later add it.
+    activeRooms = activeRooms.filter(room => room.roomId !== roomId);
+
+    if (cloneActiveRoom.participants.length > 0) {
+      activeRooms.push(cloneActiveRoom);
+    }
+  }
+};
 module.exports = {
   addNewConnectedUser,
   removeConnectedUser,
@@ -51,4 +109,9 @@ module.exports = {
   setSocketServerInstance,
   getSocketServerInstance,
   getOnlineUsers,
+  addNewActiveRoom,
+  getActiveRooms,
+  getActiveRoom,
+  joinActiveRoom,
+  leaveActiveRoom,
 };

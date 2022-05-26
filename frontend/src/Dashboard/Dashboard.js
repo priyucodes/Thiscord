@@ -5,6 +5,7 @@ import SideBar from './SideBar/SideBar';
 import FriendsSideBar from './FriendsSideBar/FriendsSideBar';
 import Messenger from './Messenger/Messenger';
 import AppBar from './AppBar/AppBar';
+import Room from './Room/Room';
 import { logout } from '../shared/utils/auth';
 import { getActions } from '../store/actions/authActions';
 import { connectWithSocketServer } from '../realtimeCommunication/socketConnection';
@@ -15,7 +16,7 @@ const Wrapper = styled('div')({
   display: 'flex',
 });
 
-function Dashboard({ setUserDetails }) {
+function Dashboard({ setUserDetails, isUserInRoom }) {
   useEffect(
     () => {
       const userDetails = localStorage.getItem('user');
@@ -39,14 +40,20 @@ function Dashboard({ setUserDetails }) {
       <FriendsSideBar />
       <Messenger />
       <AppBar />
+      {isUserInRoom && <Room />}
     </Wrapper>
   );
 }
 
+const mapStoreStateToProps = ({ room }) => {
+  return {
+    ...room,
+  };
+};
 const mapActionsToProps = dispatch => {
   return {
     ...getActions(dispatch),
   };
 };
 // mapstatetoprops,mapactionstoprops
-export default connect(null, mapActionsToProps)(Dashboard);
+export default connect(mapStoreStateToProps, mapActionsToProps)(Dashboard);

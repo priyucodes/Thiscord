@@ -23,6 +23,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.10",
     "socket.io": "^4.4.1",
+    "uuid": "^8.3.2",
+    "uuidv4": "^6.2.13",
     "xss-clean": "^0.1.1"
   }
 }
