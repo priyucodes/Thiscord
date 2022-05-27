@@ -13,7 +13,7 @@ const CustomPrimaryButton = ({
         bgcolor: '#5865F2',
         color: '#fff',
         textTransform: 'none',
-        fontSize: '16px',
+        fontSize: '1rem',
         fontWeight: 500,
         width: '100%',
         height: '40px',

@@ -9,7 +9,7 @@ const AvatarPreview = styled('div')({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  fontSize: '20px',
+  fontSize: '1.25rem',
   fontWeight: 700,
   // marginLeft: '5px',
   color: '#fff',

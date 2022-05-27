@@ -12,7 +12,7 @@ const Label = styled('p')({
   color: '#b9bbbe',
   textTransform: 'uppercase',
   fontWeight: '600',
-  fontSize: '16px',
+  fontSize: '1rem',
 });
 
 const Input = styled('input')({
@@ -24,7 +24,7 @@ const Input = styled('input')({
   color: '#dcddde',
   background: '#35393f',
   margin: 0,
-  fontSize: '16px',
+  fontSize: '1rem',
   padding: '0 5px',
 });
 function InputWithLabel(props) {

@@ -1,6 +1,6 @@
 // Core Modules
 const http = require('http');
-
+const path = require('path');
 // 3rd party modules
 const express = require('express');
 const cors = require('cors');
@@ -35,6 +35,15 @@ app.use(compression());
 // Register the modules
 app.use('/api/auth', authRoutes);
 app.use('/api/friend-invitation', friendInvitationRoutes);
+
+// Serve Static assets if in Production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('frontend/build'));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+  });
+}
 
 // SERVER
 const server = http.createServer(app);

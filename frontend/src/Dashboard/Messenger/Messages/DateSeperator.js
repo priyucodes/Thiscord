@@ -17,7 +17,7 @@ const DateLabel = styled('span')({
   top: '-10px',
   color: '#b9bbbe',
   padding: '0px 5px',
-  fontSize: '14px',
+  fontSize: '0.875rem',
 });
 function DateSeperator({ date }) {
   return (

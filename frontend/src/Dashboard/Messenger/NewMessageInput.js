@@ -17,7 +17,7 @@ const Input = styled('input')({
   color: 'white',
   border: 'none',
   borderRadius: '8px',
-  fontSize: '14px',
+  fontSize: '0.875rem',
   padding: '0 10px',
 });
 
